@@ -1,21 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
     const todoForm = document.getElementById('todo-form');
     const todoInput = document.getElementById('todo-input');
+    const todoDate = document.getElementById('todo-date');
+    const todoTime = document.getElementById('todo-time');
     const todoList = document.getElementById('todo-list');
 
     todoForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
         const todoText = todoInput.value;
-        if (todoText.trim() !== '') {
-            addTodoItem(todoText);
+        const todoDateValue = todoDate.value;
+        const todoTimeValue = todoTime.value;
+        if (todoText.trim() !== '' && todoDateValue !== '' && todoTimeValue !== '') {
+            addTodoItem(todoText, todoDateValue, todoTimeValue);
             todoInput.value = '';
+            todoDate.value = '';
+            todoTime.value = '';
         }
     });
 
-    function addTodoItem(todoText) {
+    function addTodoItem(todoText, todoDate, todoTime) {
         const li = document.createElement('li');
-        li.textContent = todoText;
+        li.innerHTML = `
+            <span>${todoText}</span>
+            <span>${todoDate} ${todoTime}</span>
+        `;
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Excluir';

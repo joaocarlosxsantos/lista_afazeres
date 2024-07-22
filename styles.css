@@ -23,12 +23,12 @@ h1 {
 
 form {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-input {
-    flex: 1;
+input[type="text"], input[type="date"], input[type="time"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
