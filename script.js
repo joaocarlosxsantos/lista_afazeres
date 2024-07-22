@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const todoText = todoInput.value;
         const todoDateValue = todoDate.value;
         const todoTimeValue = todoTime.value;
-        if (todoText.trim() !== '' && todoDateValue !== '' && todoTimeValue !== '') {
+        if (todoText.trim() !== '') {
             addTodoItem(todoText, todoDateValue, todoTimeValue);
             todoInput.value = '';
             todoDate.value = '';
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.innerHTML = `
             <span>${todoText}</span>
-            <span>${todoDate} ${todoTime}</span>
+            ${todoDate || todoTime ? `<span>${todoDate} ${todoTime}</span>` : ''}
         `;
 
         const deleteButton = document.createElement('button');
