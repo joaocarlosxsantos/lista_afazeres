@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const todoText = todoInput.value;
         const todoDateValue = todoDate.value;
         const todoTimeValue = todoTime.value;
-        if (todoText.trim() !== '' && todoDateValue !== '' && todoTimeValue !== '') {
+        if (todoText.trim() !== '') {
             addTodoItem(todoText, todoDateValue, todoTimeValue);
             todoInput.value = '';
             todoDate.value = '';
@@ -23,13 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.innerHTML = `
             <span>${todoText}</span>
-            <span>${todoDate} ${todoTime}</span>
+            ${todoDate || todoTime ? `<span>${todoDate} ${todoTime}</span>` : ''}
         `;
+
+        // Adiciona funcionalidade de marcar como concluído ao clicar no item
+        li.addEventListener('click', function() {
+            li.classList.toggle('completed');
+        });
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Excluir';
         deleteButton.classList.add('delete');
-        deleteButton.addEventListener('click', function() {
+        deleteButton.addEventListener('click', function(event) {
+            event.stopPropagation();
             li.classList.add('removing');
             li.addEventListener('transitionend', function() {
                 li.remove();
